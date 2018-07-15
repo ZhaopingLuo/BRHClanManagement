@@ -15,4 +15,7 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
+/uploads/
+application/config/config.php
+application/config/database.php
 *.psd
