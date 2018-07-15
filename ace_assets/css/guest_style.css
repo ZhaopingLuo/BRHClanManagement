@@ -1,0 +1,21 @@
+body{
+
+
+	/*background-image: url("http://s3.amazonaws.com/caself/products/photos/000/001/557/original/461223128.jpg?1519007519");
+	*/
+
+	background-image: url("../images/bg.png") !important;
+	/*background-image: url("../images/bg.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 100%;*/
+	background-color: #000000;
+	position:relative;
+}
+
+.login_panel_vertical_central{
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	transform: translate(-50%, -20%);
+	/*margin-top: -80px;*/
+}
