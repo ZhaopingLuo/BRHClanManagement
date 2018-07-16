@@ -61,7 +61,7 @@
         <th data-class="fix_picture" data-source="member_picture" data-render="callback_list_picture" style="width:60px;"></th>
         <th data-source="member_gamename" data-render="callback_list_name" data-filter>Name</th>
         <th data-source="user_email" data-render="callback_list_account" data-filter >Account</th>
-        <th data-class="with_thumb" style="width:120px;" data-source="member_position" data-render="callback_list_position" data-filter>Position</th>
+        <th data-class="with_thumb" style="width:180px;" data-source="member_position" data-render="callback_list_position" data-filter>Position</th>
 
 		<th data-class="index_list_center" style="width:130px;" data-source="member_shirt_number" data-render="callback_list_shirt_number" data-filter >Shirt#</th>
         <th data-class="index_list_right no_popover" data-source="member_KPI" style="width:80px;" data-filter >KPI</th>
