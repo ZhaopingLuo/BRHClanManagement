@@ -113,7 +113,8 @@ function thumb_small(picObj)
 function dateFormatSetting()
 {
 	return {
-		format: "MM dd, yyyy",
+		//format: "MM dd, yyyy",
+        format: "yyyy年mm月dd",
 			//endDate: "today",
 			calendarWeeks: true,
 		todayHighlight: true,

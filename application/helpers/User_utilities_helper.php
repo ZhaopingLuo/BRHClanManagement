@@ -427,8 +427,10 @@
 
 	function dateFormat($date)
 	{
-		$dateParsed = date_parse_from_format("M j, yyyy", $date);
+		//$dateParsed = date_parse_from_format("M j, yyyy", $date);
+        $dateParsed = date_parse_from_format("Y年m月d", $date);
 		$newDate = $dateParsed["year"]."/".$dateParsed["month"]."/". $dateParsed["day"];
+		
 		return $newDate;
 	}
 
@@ -439,7 +441,7 @@
 	 */
 	function dateFormat_decode($dateColumnName)
 	{
-		$decode_string = "DATE_FORMAT(".$dateColumnName.", '%b %d, %Y %H:%i')";
+		$decode_string = "DATE_FORMAT(".$dateColumnName.", '%Y年%m月%d %H:%i')";
 
 		return $decode_string;
 	}
