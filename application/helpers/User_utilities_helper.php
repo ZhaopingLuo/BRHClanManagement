@@ -430,7 +430,7 @@
 		//$dateParsed = date_parse_from_format("M j, yyyy", $date);
         $dateParsed = date_parse_from_format("Y年m月d", $date);
 		$newDate = $dateParsed["year"]."/".$dateParsed["month"]."/". $dateParsed["day"];
-		
+
 		return $newDate;
 	}
 

@@ -30,14 +30,12 @@ how do I make template?
             <p name="member_description">说明文字第一行，灰色底</p>
         </div>
         <div class="personal_games">
-            <label>正在玩
-                <i class="material-icons">
-                    arrow_right
-                </i>
+            <label>正在玩:
             </label>
             <ul class="personal_tags">
                 <li data-loop-title="tag_title" data-loop = "member_games" data-loop-limit="-1">
-                    <span name="tag_name"></span>
+                    <img src="<?=base_url("/uploads/")?>" name="tag_picture"/>
+                    <!--<span name="tag_name"></span>-->
                 </li>
             </ul>
         </div>

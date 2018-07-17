@@ -772,10 +772,14 @@ input:-webkit-autofill {
 		margin-top: 5px;
 		padding: 0 5px;
 	}
-	.personal_information_content .personal_tags_container li img, .personal_games img
+	.personal_information_content .personal_tags_container li img
+    {
+	  max-height: 24px;
+	  max-width: 24px;
+    }
+	.personal_games img
 	{
-		max-height: 24px;
-		max-width: 24px;
+		max-height: 50px;
 	}
 	.personal_information_content .personal_tags_container ul.personal_tags .personal_tags_name
 	{}
