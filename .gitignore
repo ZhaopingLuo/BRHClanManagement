@@ -20,3 +20,15 @@ application/config/config.php
 application/config/database.php
 *.psd
 application/config/database.php
+application/config/database.php
+ace_assets/fromremote/iconfont/codepoints
+ace_assets/fromremote/iconfont/material-icons.css
+ace_assets/fromremote/iconfont/MaterialIcons-Regular.eot
+ace_assets/fromremote/iconfont/MaterialIcons-Regular.ijmap
+ace_assets/fromremote/iconfont/MaterialIcons-Regular.svg
+ace_assets/fromremote/iconfont/MaterialIcons-Regular.ttf
+ace_assets/fromremote/iconfont/MaterialIcons-Regular.woff
+ace_assets/fromremote/iconfont/MaterialIcons-Regular.woff2
+ace_assets/fromremote/iconfont/README.md
+application/config/database.php
+application/config/database.php
