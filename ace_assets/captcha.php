@@ -51,9 +51,9 @@ $captcha->CreateImage();
  */
 class SimpleCaptcha {
 
-    /** 
+    /**
      * Difficulty level (if used, keep 'Wave configuracion' on default)
-     * normal = 1 
+     * normal = 1
      * closer to 0 is more easy, for ex: 0.4
      * closer to 2 is more hard, for ex: 1.8
      * smaller then 0 and bigger than 2 is caped to min or max
@@ -76,14 +76,15 @@ class SimpleCaptcha {
      * directory to another location outise the web server
      *
      */
-    public $resourcesPath = __DIR__. '/' . 'resources';
+
+    public $resourcesPath = 'resources';
 
     /** Min word length (for non-dictionary random text generation) */
     public $minWordLength = 15;
 
     /**
      * Max word length (for non-dictionary random text generation)
-     * 
+     *
      * Used for dictionary words indicating the word-length
      * for font-size modification purposes
      */
@@ -143,7 +144,7 @@ class SimpleCaptcha {
      */
     public $scale = 3;
 
-    /** 
+    /**
      * Blur effect for better image quality (but slower image processing).
      * Better image results with scale=3
      */
@@ -151,7 +152,7 @@ class SimpleCaptcha {
 
     /** Debug? */
     public $debug = false;
-    
+
     /** Image format: jpeg or png */
     public $imageFormat = 'png';
 
@@ -173,7 +174,7 @@ class SimpleCaptcha {
 
         /** Initialization */
         $this->ImageAllocate();
-        
+
         /** Text insertion */
         $text = $this->GetCaptchaText();
         $fontcfg  = $this->fonts[array_rand($this->fonts)];
@@ -223,19 +224,19 @@ class SimpleCaptcha {
         }
 
         $this->im = imagecreatetruecolor($this->width*$this->scale, $this->height*$this->scale);
-		imagealphablending($this->im, true);
+        imagealphablending($this->im, true);
 
-		// Background color
+        // Background color
         $this->GdBgColor = imagecolorallocatealpha($this->im,
             $this->backgroundColor[0],
             $this->backgroundColor[1],
             $this->backgroundColor[2],
-			80
+            80
         );
-		imagefill($this->im, 0, 0, $this->GdBgColor);
+        imagefill($this->im, 0, 0, $this->GdBgColor);
         //imagefilledrectangle($this->im, 0, 0, $this->width*$this->scale, $this->height*$this->scale, $this->GdBgColor);
 
-		// Foreground color
+        // Foreground color
         $color           = $this->colors[mt_rand(0, sizeof($this->colors)-1)];
         $this->GdFgColor = imagecolorallocatealpha($this->im, $color[0], $color[1], $color[2], 255);
 
@@ -245,11 +246,11 @@ class SimpleCaptcha {
                 $this->shadowColor[0],
                 $this->shadowColor[1],
                 $this->shadowColor[2],
-			255
+                255
             );
         }
-		imagefill($this->im, 0, 0, $this->GdBgColor);
-	}
+        imagefill($this->im, 0, 0, $this->GdBgColor);
+    }
 
     /**
      * Text generation
@@ -318,7 +319,7 @@ class SimpleCaptcha {
         if (substr($this->wordsFile, 0, 1) == '/') {
             $wordsfile = $this->wordsFile;
         } else {
-            $wordsfile = $this->resourcesPath.'/'.$this->wordsFile;
+            $wordsfile = __DIR__. '/' . $this->resourcesPath.'/'.$this->wordsFile;
         }
 
         if (!file_exists($wordsfile)) {
@@ -389,7 +390,7 @@ class SimpleCaptcha {
         }
 
         // Full path of font file
-        $fontfile = $this->resourcesPath.'/fonts/'.$fontcfg['font'];
+        $fontfile = __DIR__. '/' . $this->resourcesPath.'/fonts/'.$fontcfg['font'];
 
 
         /** Increase font-size for shortest words: 9% for each glyp missing */
@@ -441,7 +442,7 @@ class SimpleCaptcha {
 
         // Y-axis wave generation
         $k = rand(0, 100);
-        $yp = $this->scale*($this->Yperiod)*rand(1,2) * $wdf; 
+        $yp = $this->scale*($this->Yperiod)*rand(1,2) * $wdf;
         for ($i = 0; $i < ($this->height*$this->scale); $i++) {
             imagecopy($this->im, $this->im,
                 sin($k+$i/$yp) * ($this->scale*$this->Yamplitude), $i-1,
