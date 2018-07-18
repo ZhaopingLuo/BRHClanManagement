@@ -447,7 +447,7 @@ function create_dataTable(selector, url, searchForm, initialSearch)
                 if(lag_trigger == null)
                 {
                     lag_trigger = {out: tag_out, in: ""};
-                    setTimeout(check_inout_type, 200, e);
+                    setTimeout(check_inout_type, 10, e);
                 }
             }
         });
