@@ -24,8 +24,6 @@ function variables_get_auth()
     $returnValue[] = array(VISITOR, "Users","view_invite_signup", ">=");
 
 
-
-
 	$returnValue[] = array(VISITOR, "Users","form_signup", ">=");
 	$returnValue[] = array(VISITOR, "Users","func_active", ">=");
 
@@ -43,6 +41,8 @@ function variables_get_auth()
     $returnValue[] = array(VANGUARD, "Tags","*", ">");
     $returnValue[] = array(VANGUARD, "Members","*", ">");
 
+    $returnValue[] = array(INTERN, "Members","view_manage_member", ">=");
+    $returnValue[] = array(INTERN, "Members","form_manage_member", ">=");
 
 
 	return $returnValue;

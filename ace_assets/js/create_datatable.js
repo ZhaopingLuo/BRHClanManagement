@@ -348,8 +348,58 @@ function create_dataTable(selector, url, searchForm, initialSearch)
         tag_in = "";
         tag_out = "";
 
-        // !! check current_selected = current_out, not trigger leave?
+        //  {in:"", out:""}
+        var lag_trigger = null;
 
+        // 几个判断事件：
+        // 1.是否在同一行，2.是否换行，3.是否移出去。延时无数次只做一次判断怎么写？
+        //  1. enter什么 leave什么
+        //  2. enter什么 leave什么
+        //  3. enter什么 leave什么
+        // 延时判断：设置一个无辜开关。第一次延时触发开关，开关触发中就不再触发，经历延时以后，判断的同时关掉开关。
+
+        // 在离开时触发，用下一个enter去匹配leave。
+        // 永久离开就没有enter
+
+        // 所以trigger是一个 struct: in, out. 每一个 out 都匹配一个 in。trigger存在的时候不重复触发。
+        // 延时后 check_inout_type()
+
+        function check_inout_type(e)
+        {
+            if(lag_trigger != null) // 防bug
+            {
+                //console.log(lag_trigger);
+
+                if(lag_trigger.out =="" && lag_trigger.in != "")
+                    // first enter
+                {
+                    //console.log("enter");
+                    show_popover(lag_trigger.in ,e)
+                }
+                else if(lag_trigger.in != "" && lag_trigger.out != "" && lag_trigger.out[0] == lag_trigger.in[0])
+                    // switch between a same line
+                {
+                    // do nothing
+                    //console.log("donothing");
+                }
+                else if(lag_trigger.in != "" && lag_trigger.out != "" && lag_trigger.out[0] != lag_trigger.in[0])
+                    // switch between different lines
+                {
+                    //console.log("switch");
+                    show_popover(lag_trigger.in ,e);
+                    hide_popover(lag_trigger.out,e);
+                }
+                else
+                {
+                    //console.log("totally out");
+                    hide_popover(selector + " tr[data-toggle='popover']",e);
+                }
+            }
+
+            lag_trigger = null; // 释放trigger
+        }
+
+        // !! check current_selected = current_out, not trigger leave?
         function show_popover(popover, e)
         {
             if($(selector).attr("data-popover-freeze")!=1){
@@ -357,14 +407,11 @@ function create_dataTable(selector, url, searchForm, initialSearch)
             }
         }
 
-
         function hide_popover(popover, e)
         {
+            // 因为延时，需要再判断一次
             if($(selector).attr("data-popover-freeze")!=1) {
-
-                if (tag_in != tag_out) {
-                    $(popover).popover('hide');
-                }
+                $(popover).popover('hide');
             }
         }
 
@@ -375,27 +422,46 @@ function create_dataTable(selector, url, searchForm, initialSearch)
             if($(selector).attr("data-popover-freeze")!=1 && ($(selector).is(e.target) || $(selector).has(e.target).length > 0)) {
 
                 tag_in = $(this).parent();
-                //show_popover(tag_in, e)
-                setTimeout(show_popover, 10, tag_in, e);
+
+                if(lag_trigger == null) // 陌拜
+                {
+                    lag_trigger = {out: "", in: tag_in};
+                    // 需要触发
+                    check_inout_type(e);
+                }
+                else
+                {
+                    lag_trigger.in = tag_in;
+                }
             }
         });
-
-        // check the pop-proof td
-        /*$(document).on('mouseover', selector + ' tr[data-id] td.no_popover', function(e) {
-
-            current_selected = $(this).parent();
-            show_popover(e);
-            setTimeout(popover_trigger_done, 100);
-        });*/
-
 
         // hover of popover, except its frozen/cursor is on table
         $(document).on('mouseleave', selector +' tr[data-id] td:not(.no_popover)', function(e) {
 
             if($(selector).attr("data-popover-freeze")!=1) {
+
                 tag_out = $(this).parent();
-                //hide_popover(tag_out, e)
-                setTimeout(hide_popover, 1, tag_out, e);
+
+                // pull trigger
+                if(lag_trigger == null)
+                {
+                    lag_trigger = {out: tag_out, in: ""};
+                    setTimeout(check_inout_type, 200, e);
+                }
+            }
+        });
+
+        // if mouse leave the whole table, clear the trigger.in
+        $(document).on('mouseleave', selector + '> tbody , .no_popover ', function(e) {
+
+            if($(selector).attr("data-popover-freeze")!=1) {
+
+                // pull trigger
+                if(lag_trigger !== null)
+                {
+                    lag_trigger.in = "";
+                }
             }
         });
 
