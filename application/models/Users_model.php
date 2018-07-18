@@ -103,6 +103,11 @@ class Users_model extends CI_Model {
 		return self::$db->update(self::$mainTableName);
 	}
 
+    public function delete_forever($id)
+    {
+        return self::$db->delete(self::$mainTableName, array('user_id' => $id));
+    }
+
 	/**
 	 * Will be used for have-not-login user, so dont need the filter
 	 * @param $data

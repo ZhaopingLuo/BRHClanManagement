@@ -433,7 +433,7 @@ class Users extends CI_Controller {
 			$data['messages'] = 'Request Expired';
 			
 			// delete the user
-			$this->users_model->delete($user_id);
+			$this->users_model->delete_forever($user_id);
 		}
 		else
 		{
