@@ -351,19 +351,6 @@ function create_dataTable(selector, url, searchForm, initialSearch)
         //  {in:"", out:""}
         var lag_trigger = null;
 
-        // 几个判断事件：
-        // 1.是否在同一行，2.是否换行，3.是否移出去。延时无数次只做一次判断怎么写？
-        //  1. enter什么 leave什么
-        //  2. enter什么 leave什么
-        //  3. enter什么 leave什么
-        // 延时判断：设置一个无辜开关。第一次延时触发开关，开关触发中就不再触发，经历延时以后，判断的同时关掉开关。
-
-        // 在离开时触发，用下一个enter去匹配leave。
-        // 永久离开就没有enter
-
-        // 所以trigger是一个 struct: in, out. 每一个 out 都匹配一个 in。trigger存在的时候不重复触发。
-        // 延时后 check_inout_type()
-
         function check_inout_type(e)
         {
             if(lag_trigger != null) // 防bug
